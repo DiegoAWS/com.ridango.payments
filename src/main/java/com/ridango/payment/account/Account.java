@@ -18,17 +18,17 @@ public class Account {
     )
     private Long id;
     private String name;
-    private Integer balance;
+    private double balance;
 
     public Account() {
     }
 
-    public Account(String name, Integer balance) {
+    public Account(String name, double balance) {
         this.name = name;
         this.balance = balance;
     }
 
-    public Account(Long id, String name, Integer balance) {
+    public Account(Long id, String name, double balance) {
         this.id = id;
         this.name = name;
         this.balance = balance;
@@ -50,7 +50,7 @@ public class Account {
         this.name = name;
     }
 
-    public Integer getBalance() {
+    public double getBalance() {
         return balance;
     }
 
@@ -63,7 +63,7 @@ public class Account {
                 '}';
     }
 
-    public void setBalance(Integer balance) {
+    public void setBalance(double balance) {
         this.balance = balance;
     }
 }

@@ -12,10 +12,10 @@ public class AccountConfig {
     @Bean
     CommandLineRunner commandLineRunnerAccount(AccountRepository accountRepository){
         return args -> {
-            Account arya    = new Account(  "Arya", 100 );
-            Account john    = new Account(  "John", 100 );
-            Account sansa   = new Account( "Sansa", 100 );
-            Account eddard = new Account( "Eddard", 100 );
+            Account arya    = new Account(  "Arya", 100f );
+            Account john    = new Account(  "John", 100f );
+            Account sansa   = new Account( "Sansa", 100f );
+            Account eddard = new Account( "Eddard", 100f );
 
             accountRepository.saveAll(
                     List.of(arya, john, sansa, eddard)

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,7 +31,11 @@ public class PaymentService {
     @Transactional
     public Payment makePayment(Payment payment){
 
-        int amount= payment.getAmount();
+        double amount= payment.getAmount();
+
+        if(   BigDecimal.valueOf(amount).scale() > 2`){
+            throw new IllegalStateException("Amount has more than 2 decimal places");
+        }
 
 
         Account sender = accountRepository.findById(payment.getSender_account_id()).orElseThrow(

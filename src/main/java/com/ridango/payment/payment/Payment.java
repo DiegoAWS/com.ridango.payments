@@ -25,7 +25,7 @@ public class Payment
 
     private long receiver_account_id;
 
-    private Integer amount;
+    private double amount;
 
     private LocalDate timestamp;
 
@@ -64,11 +64,11 @@ public class Payment
         this.receiver_account_id = receiver_account_id;
     }
 
-    public Integer getAmount() {
+    public double getAmount() {
         return amount;
     }
 
-    public void setAmount(Integer amount) {
+    public void setAmount(double amount) {
         this.amount = amount;
     }
 
@@ -83,14 +83,14 @@ public class Payment
     public Payment() {
     }
 
-    public Payment(long sender_account_id, long receiver_account_id, Integer amount) {
+    public Payment(long sender_account_id, long receiver_account_id, double amount) {
         this.sender_account_id = sender_account_id;
         this.receiver_account_id = receiver_account_id;
         this.amount = amount;
         this.timestamp = LocalDate.now();
     }
 
-    public Payment(long id, long sender_account_id, long receiver_account_id, Integer amount) {
+    public Payment(long id, long sender_account_id, long receiver_account_id, double amount) {
         this.id = id;
         this.sender_account_id = sender_account_id;
         this.receiver_account_id = receiver_account_id;
