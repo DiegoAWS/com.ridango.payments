@@ -5,6 +5,7 @@ import com.ridango.payment.account.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,37 +27,30 @@ public class PaymentService {
         return paymentRepository.findAll();
     }
 
+    @Transactional
     public Payment makePayment(Payment payment){
 
         int amount= payment.getAmount();
 
-        Optional<Account> sender = accountRepository.findById(payment.getSender_account_id());
-        Optional<Account> receiver = accountRepository.findById(payment.getReceiver_account_id());
 
-        if(!sender.isPresent()){
-            throw new RuntimeException("Sender with id "+payment.getSender_account_id()+" not Found");
+        Account sender = accountRepository.findById(payment.getSender_account_id()).orElseThrow(
+                ()->new IllegalStateException("Sender with id "+payment.getSender_account_id()+" not Found"));
+
+       Account receiver = accountRepository.findById(payment.getReceiver_account_id()).orElseThrow(
+               ()->new IllegalStateException("Receiver with id "+payment.getReceiver_account_id()+" not Found"));
+
+       if(amount<=0){
+           throw new IllegalStateException("Invalid amount "+amount);
+       }
+
+        if(sender.getBalance() < amount){
+            throw new IllegalStateException("Sender has no enough balance");
         }
-        if(!receiver.isPresent()){
-            throw new RuntimeException("Receiver with id "+payment.getReceiver_account_id()+" not Found");
-        }
-
-        if(sender.get().getBalance() < amount){
-            throw new RuntimeException("Sender has no enough balance");
-        }
 
 
-        Account senderInstance = sender.get();
+        sender.setBalance(sender.getBalance() - amount);
 
-        senderInstance.setBalance(senderInstance.getBalance() - amount);
-
-        accountRepository.save(senderInstance);
-
-        Account receiverInstance = sender.get();
-
-        receiverInstance.setBalance(receiverInstance.getBalance() + amount);
-
-        accountRepository.save(receiverInstance);
-
+        receiver.setBalance(receiver.getBalance() + amount);
 
        return paymentRepository.save(payment);
     }
