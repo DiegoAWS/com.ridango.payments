@@ -1,6 +1,6 @@
 package com.ridango.payment.account;
 
-import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -8,19 +8,15 @@ import java.util.List;
 @Service
 public class AccountService {
 
+    private final AccountRepository accountRepository;
+
+    @Autowired
+    public AccountService(AccountRepository accountRepository) {
+        this.accountRepository = accountRepository;
+    }
+
     public List<Account> getAllAccounts(){
 
-        return List.of(
-                new Account(
-                        1L,
-                        "Diego",
-                        200
-                ),
-                new Account(
-                        2L,
-                        "Marian",
-                        500
-                )
-        );
+        return accountRepository.findAll();
     }
 }

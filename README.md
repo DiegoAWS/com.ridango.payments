@@ -9,7 +9,8 @@
 * schema.sql will generate sql tables when Spring application starts
 * If you have any problems to run this pre-setup Spring application then feel free to create your own Spring project
 
-## Assignment
+## Assignment 
+
 * Write endpoint POST `/payment` with json body 
     * Request json example:
         ```
