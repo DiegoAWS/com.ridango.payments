@@ -10,11 +10,11 @@ import java.util.List;
 public class AccountConfig {
 
     @Bean
-    CommandLineRunner commandLineRunner(AccountRepository accountRepository){
+    CommandLineRunner commandLineRunnerAccount(AccountRepository accountRepository){
         return args -> {
-            Account arya= new Account( 1L, "Arya", 200 );
-            Account john= new Account( 2L, "John", 200 );
-            Account sansa= new Account( 3L, "Sansa", 200 );
+            Account arya= new Account(  "Arya", 200 );
+            Account john= new Account(  "John", 200 );
+            Account sansa= new Account( "Sansa", 200 );
 
             accountRepository.saveAll(
                     List.of(arya, john, sansa)
