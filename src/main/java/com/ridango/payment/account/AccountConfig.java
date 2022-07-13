@@ -12,12 +12,13 @@ public class AccountConfig {
     @Bean
     CommandLineRunner commandLineRunnerAccount(AccountRepository accountRepository){
         return args -> {
-            Account arya= new Account(  "Arya", 200 );
-            Account john= new Account(  "John", 200 );
-            Account sansa= new Account( "Sansa", 200 );
+            Account arya    = new Account(  "Arya", 100 );
+            Account john    = new Account(  "John", 100 );
+            Account sansa   = new Account( "Sansa", 100 );
+            Account eddard = new Account( "Eddard", 100 );
 
             accountRepository.saveAll(
-                    List.of(arya, john, sansa)
+                    List.of(arya, john, sansa, eddard)
             );
         };
     }
